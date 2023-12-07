@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Päiväkirja</title>
+    <title>Etusivu</title>
 </head>
 <body>
-    <h1>Tervetuloa päiväkirjaan!</h1>
+    <h1>Tervetuloa!</h1>
+
+    <!-- Napit muihin sivuihin -->
+    <a th:href="@{/lista}">Siirry lista-sivulle</a>
+    <br>
+    <a th:href="@{/lisaa}">Siirry lisaa-sivulle</a>
+    <br>
+    <a th:href="@{/muokkaa/1}">Siirry muokkaa-sivulle (esimerkki)</a>
+
 </body>
 </html>
