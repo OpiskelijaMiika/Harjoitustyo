@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lisää Paivakirja merkintä</title>
+</head>
+<body>
+    <h2>Lisää Paivakirja merkintä</h2>
+    <form th:object="${entry}" th:action="@{/paivakirja/add}" method="post">
+        <label for="content">Sisältö:</label>
+        <input type="text" id="content" name="content" th:field="*{content}" required>
+        <br>
+        <button type="submit">Lisää merkintä</button>
+    </form>
+    <a href="/paivakirja/lista">Takaisin listaan</a>
+</body>
+</html>
