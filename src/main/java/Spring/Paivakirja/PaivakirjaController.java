@@ -36,8 +36,10 @@ public class PaivakirjaController {
     public String addDiaryEntry(@ModelAttribute PaivakirjaEntry entry) {
         entry.setCreatedAt(LocalDateTime.now());
         paivakirjaEntryRepository.save(entry);
-        return "redirect:/paivakirja/lista";
+        return "redirect:/lista";
     }
+
+
 
     @GetMapping("/muokkaa/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
@@ -53,13 +55,13 @@ public class PaivakirjaController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid entry Id:" + id));
         existingEntry.setContent(entry.getContent());
         paivakirjaEntryRepository.save(existingEntry);
-        return "redirect:/paivakirja/lista";
+        return "redirect:/lista";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteDiaryEntry(@PathVariable Long id) {
         paivakirjaEntryRepository.deleteById(id);
-        return "redirect:/paivakirja/lista";
+        return "redirect:/lista";
     }
 
     @RequestMapping("/virhe")

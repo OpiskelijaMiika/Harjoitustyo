@@ -2,16 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Muokkaa Paivakirjaa</title>
+    <title>Muokkaa Päivakirjaa</title>
 </head>
 <body>
-    <h2>Muokkaa Paivakirjaa</h2>
-    <form th:object="${entry}" th:action="@{/paivakirja/edit/{id}(id=${entry.id})}" method="post">
+    <h2>Muokkaa Päivakirjaa</h2>
+    <form th:object="${entry}" th:action="@{/muokkaa/{id}(id=${entry.id})}" method="post">
         <label for="content">Sisältö:</label>
         <input type="text" id="content" name="content" th:field="*{content}" required>
         <br>
         <button type="submit">Tallenna muutokset</button>
     </form>
-    <a href="/paivakirja/lista">Takaisin listaan</a>
+    <a th:href="@{/lista}">Takaisin listaan</a>
+    <ul>
+        <li><a th:href="@{/}" th:text="Etusivulle"></a></li>
+    </ul>
 </body>
 </html>

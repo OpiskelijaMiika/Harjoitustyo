@@ -16,6 +16,10 @@ public class PaivakirjaEntry {
 
     private LocalDateTime createdAt;
 
+    public Long getId() {
+        return id;
+    }
+
     public String getContent() {
         return content;
     }

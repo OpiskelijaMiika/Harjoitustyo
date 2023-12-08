@@ -2,18 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Paivakirja</title>
+    <title>Päivakirja</title>
 </head>
 <body>
-    <h2>Paivakirja</h2>
+    <h2>Päivakirja</h2>
     <ul>
         <li th:each="entry : ${entries}">
             <span th:text="${entry.content}"></span>
             <span th:text="${entry.createdAt}"></span>
-            <a th:href="@{'/paivakirja/edit/' + ${entry.id}}">Muokkaa</a>
-            <a th:href="@{'/paivakirja/delete/' + ${entry.id}}">Poista</a>
+            <a th:href="@{/muokkaa/{id}(id=${entry.id})}">Muokkaa</a>
+            <a th:href="@{/delete/{id}(id=${entry.id})}">Poista</a>
         </li>
     </ul>
-    <a href="/paivakirja/lisaa">Lisää uusi merkintä</a>
+    <a th:href="@{/lisaa}">Lisää uusi merkintä</a>
+    <ul>
+        <li><a th:href="@{/}" th:text="Etusivulle"></a></li>
+    </ul>
 </body>
 </html>
