@@ -58,7 +58,7 @@ public class PaivakirjaController {
         return "redirect:/lista";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/lista/delete/{id}")
     public String deleteDiaryEntry(@PathVariable Long id) {
         paivakirjaEntryRepository.deleteById(id);
         return "redirect:/lista";
@@ -66,8 +66,7 @@ public class PaivakirjaController {
 
     @RequestMapping("/virhe")
     public String handleError() {
-        // Provide a custom error view or redirect to the appropriate page
-        return "paivakirja/virhe"; // Varmista, että tämä on oikea polku Thymeleaf-sivulle
+        return "paivakirja/virhe"; 
     }
 }
 
