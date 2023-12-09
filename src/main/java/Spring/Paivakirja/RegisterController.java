@@ -1,6 +1,7 @@
 package Spring.Paivakirja;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,11 @@ public class RegisterController {
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public RegisterController(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+public RegisterController(UserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder) {
+    this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
+}
+
 
     @GetMapping
     public String showRegistrationForm() {
@@ -42,7 +44,6 @@ public class RegisterController {
         return "redirect:/login?registerSuccess";
     }
 
-    
 }
 
 
