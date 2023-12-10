@@ -29,15 +29,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/lisaa", "/lista", "/register").permitAll()
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-            .logout()
-                .permitAll();
+            .antMatchers("/register").permitAll() // Salli rekisteröintisivun kaikille
+            .anyRequest().authenticated()
+            .and()
+        .formLogin()
+            .loginPage("/login") // Määritä kirjautumissivu
+            .defaultSuccessUrl("/", true) // Ohjaa onnistuneen kirjautumisen jälkeen tähän sivuun
+            .permitAll()
+            .and()
+        .logout()
+            .permitAll();
     }
 
     @Override
