@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,13 +34,15 @@ public class PaivakirjaController {
     }
 
     @PostMapping("/lisaa")
-    public String addDiaryEntry(@ModelAttribute PaivakirjaEntry entry) {
+    public String addDiaryEntry(@ModelAttribute PaivakirjaEntry entry, Authentication authentication) {
+        // Hae kirjautunut käyttäjä
+        PaivakirjaUser user = (PaivakirjaUser) authentication.getPrincipal();
+        entry.setUser(user);
+
         entry.setCreatedAt(LocalDateTime.now());
         paivakirjaEntryRepository.save(entry);
         return "redirect:/lista";
     }
-
-
 
     @GetMapping("/muokkaa/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {

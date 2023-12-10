@@ -28,7 +28,7 @@ public RegisterController(UserRepository userRepository, @Lazy BCryptPasswordEnc
     }
 
     @PostMapping
-    public String registerUser(User user) {
+    public String registerUser(PaivakirjaUser user) {
         // Tarkistaa onko käyttäjätunnus jo käytössä
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             // Käyttäjätunnus on jo käytössä
