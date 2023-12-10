@@ -2,10 +2,55 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Paivakirja</title>
+    <title>Päiväkirja</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        span {
+            margin-right: 10px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul.menu {
+            margin-top: 20px;
+            padding: 0;
+        }
+
+        li.menu-item {
+            display: inline;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Paivakirja</h2>
+    <h2>Päiväkirja</h2>
+
     <ul>
         <li th:each="entry : ${entries}">
             <span th:text="${entry.content}"></span>
@@ -14,9 +59,11 @@
             <a th:href="@{'/lista/delete/' + ${entry.id}}">Poista</a>
         </li>
     </ul>
+
     <a th:href="@{/lisaa}">Lisää uusi merkintä</a>
-    <ul>
-        <li><a th:href="@{/}" th:text="Etusivulle"></a></li>
+
+    <ul class="menu">
+        <li class="menu-item"><a th:href="@{/}" th:text="Etusivulle"></a></li>
     </ul>
 </body>
 </html>

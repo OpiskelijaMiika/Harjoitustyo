@@ -2,20 +2,81 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lisää Päivakirja merkintä</title>
+    <title>Lisää Päiväkirja merkintä</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        ul.menu {
+            margin-top: 20px;
+            padding: 0;
+        }
+
+        li.menu-item {
+            display: inline;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Lisää Päivakirja merkintä</h2>
+    <h2>Lisää Päiväkirja merkintä</h2>
+
     <form th:object="${entry}" th:action="@{/lisaa}" method="post">
         <label for="content">Sisältö:</label>
         <input type="text" id="content" name="content" th:field="*{content}" required>
-        <br>
+
         <button type="submit">Lisää merkintä</button>
     </form>
-    <a th:href="@{/lista}">Takaisin päiväkirjaan</a>
-    <ul>
-        <li><a th:href="@{/}" th:text="Etusivulle"></a></li>
-    </ul>
 
+    <a th:href="@{/lista}">Takaisin päiväkirjaan</a>
+
+    <ul class="menu">
+        <li class="menu-item"><a th:href="@{/}" th:text="Etusivulle"></a></li>
+    </ul>
 </body>
 </html>

@@ -2,17 +2,68 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Muokkaa Päivakirjaa</title>
+    <title>Muokkaa Päiväkirjaa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            width: 300px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 8px;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            display: inline;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Muokkaa Päivakirjaa</h2>
+    <h2>Muokkaa Päiväkirjaa</h2>
+    
     <form th:object="${entry}" th:action="@{/muokkaa/{id}(id=${entry.id})}" method="post">
         <label for="content">Sisältö:</label>
         <input type="text" id="content" name="content" th:field="*{content}" required>
         <br>
         <button type="submit">Tallenna muutokset</button>
     </form>
-    <a th:href="@{/lista}">Takaisin listaan</a>
+    
+    <a th:href="@{/lista}">Takaisin päiväkirjaan</a>
+    
     <ul>
         <li><a th:href="@{/}" th:text="Etusivulle"></a></li>
     </ul>
