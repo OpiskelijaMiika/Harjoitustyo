@@ -9,10 +9,10 @@
 <body>
     <h2>Rekisteröidy</h2>
     
-    <!-- Lisää virheviesti näkyville, jos rekisteröinti epäonnistui -->
+    <!-- virheviesti näkyville jos rekisteröinti epäonnistui -->
     <div th:if="${param.error}" style="color: red;">Käyttäjänimi on jo käytössä</div>
 
-    <!-- Lisää viesti onnistuneesta rekisteröinnistä -->
+    <!-- viesti onnistuneesta rekisteröinnistä -->
     <div th:if="${param.registerSuccess}" style="color: green;">rekisteröinti onnistui</div>
 
     <form method="post" th:action="@{/register}">

@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -23,9 +24,6 @@ public class PaivakirjaUser  implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<PaivakirjaEntry> entries;
-
-    // Lisätään roolit (voi olla tarpeen riippuen sovelluksen vaatimuksista)
-    // private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -59,39 +57,28 @@ public class PaivakirjaUser  implements UserDetails {
         this.entries = entries;
     }
 
-    @Override
+     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+        return Collections.emptyList();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isAccountNonExpired'");
+        return true;  
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isAccountNonLocked'");
+        return true;  
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isCredentialsNonExpired'");
+        return true;  
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEnabled'");
+        return true;  
     }
-
-    // Voit myös lisätä roolien käsittelyyn liittyviä metodeja tarpeen mukaan
 }
-
-
-
-

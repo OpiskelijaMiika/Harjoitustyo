@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.Authentication;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -20,10 +22,20 @@ public class PaivakirjaController {
         return "paivakirja/index";
     }
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/lista")
-    public String showDiaryEntries(Model model) {
-        List<PaivakirjaEntry> entries = paivakirjaEntryRepository.findAll();
-        model.addAttribute("entries", entries);
+    public String showDiaryEntries(Model model, Principal principal) {
+        String username = principal.getName();
+        Optional<PaivakirjaUser> userOptional = userRepository.findByUsername(username);
+
+        if (userOptional.isPresent()) {
+            PaivakirjaUser user = userOptional.get();
+            List<PaivakirjaEntry> entries = paivakirjaEntryRepository.findByUser(user);
+            model.addAttribute("entries", entries);
+        }
+
         return "paivakirja/lista";
     }
 
@@ -34,15 +46,20 @@ public class PaivakirjaController {
     }
 
     @PostMapping("/lisaa")
-    public String addDiaryEntry(@ModelAttribute PaivakirjaEntry entry, Authentication authentication) {
-        // Hae kirjautunut käyttäjä
-        PaivakirjaUser user = (PaivakirjaUser) authentication.getPrincipal();
-        entry.setUser(user);
+    public String addDiaryEntry(@ModelAttribute PaivakirjaEntry entry, Principal principal) {
+        String username = principal.getName();
+        Optional<PaivakirjaUser> userOptional = userRepository.findByUsername(username);
 
-        entry.setCreatedAt(LocalDateTime.now());
-        paivakirjaEntryRepository.save(entry);
+        if (userOptional.isPresent()) {
+            PaivakirjaUser user = userOptional.get();
+            entry.setUser(user);
+            entry.setCreatedAt(LocalDateTime.now());
+            paivakirjaEntryRepository.save(entry);
+        }
+
         return "redirect:/lista";
     }
+
 
     @GetMapping("/muokkaa/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
