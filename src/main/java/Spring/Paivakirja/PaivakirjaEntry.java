@@ -19,6 +19,8 @@ public class PaivakirjaEntry {
 
     private LocalDateTime createdAt;
 
+    private boolean important;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private PaivakirjaUser user;
@@ -47,5 +49,14 @@ public class PaivakirjaEntry {
         this.user = user;
     }
 
+    public boolean isImportant() {
+        return important;
+    }
+
+    public void setImportant(boolean important) {
+        this.important = important;
+    }
 }
+
+
 

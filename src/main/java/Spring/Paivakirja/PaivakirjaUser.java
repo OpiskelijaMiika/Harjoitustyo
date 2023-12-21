@@ -82,3 +82,4 @@ public class PaivakirjaUser  implements UserDetails {
         return true;  
     }
 }
+

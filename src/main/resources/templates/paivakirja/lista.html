@@ -51,12 +51,27 @@
 <body>
     <h2>Päiväkirja</h2>
 
+    <h3>Tavalliset merkinnät</h3>
     <ul>
-        <li th:each="entry : ${entries}">
+        <li th:each="entry : ${entries}" th:unless="${entry.important}">
             <span th:text="${entry.content}"></span>
             <span th:text="${entry.createdAt}"></span>
             <a th:href="@{'/muokkaa/' + ${entry.id}}">Muokkaa</a>
             <a th:href="@{'/lista/delete/' + ${entry.id}}">Poista</a>
+            <a th:if="${!entry.important}" th:href="@{'/lista/markImportant/' + ${entry.id}}">Merkitse tärkeäksi</a>
+            <a th:if="${entry.important}" th:href="@{'/lista/markNotImportant/' + ${entry.id}}">Poista tärkeys</a>
+        </li>
+    </ul>
+
+    <h3>Tärkeät merkinnät</h3>
+    <ul>
+        <li th:each="entry : ${entries}" th:if="${entry.important}">
+            <span th:text="${entry.content}"></span>
+            <span th:text="${entry.createdAt}"></span>
+            <a th:href="@{'/muokkaa/' + ${entry.id}}">Muokkaa</a>
+            <a th:href="@{'/lista/delete/' + ${entry.id}}">Poista</a>
+            <a th:if="${!entry.important}" th:href="@{'/lista/markImportant/' + ${entry.id}}">Merkitse tärkeäksi</a>
+            <a th:if="${entry.important}" th:href="@{'/lista/markNotImportant/' + ${entry.id}}">Poista tärkeys</a>
         </li>
     </ul>
 

@@ -88,5 +88,25 @@ public class PaivakirjaController {
     public String handleError() {
         return "paivakirja/virhe"; 
     }
+
+    @GetMapping("/lista/markImportant/{id}")
+    public String markAsImportant(@PathVariable Long id) {
+        markEntryImportance(id, true);
+        return "redirect:/lista";
+    }
+
+    @GetMapping("/lista/markNotImportant/{id}")
+    public String markAsNotImportant(@PathVariable Long id) {
+        markEntryImportance(id, false);
+        return "redirect:/lista";
+    }
+
+    private void markEntryImportance(Long id, boolean important) {
+        PaivakirjaEntry entry = paivakirjaEntryRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Virheellinen merkintä:" + id));
+        entry.setImportant(important);
+        paivakirjaEntryRepository.save(entry);
+    }
+
 }
 
